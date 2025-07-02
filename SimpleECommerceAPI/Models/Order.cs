@@ -7,6 +7,7 @@ public class Order
 
     //Props
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public bool Status { get; set; }
 
     //FK
     public int UserId { get; set; }
