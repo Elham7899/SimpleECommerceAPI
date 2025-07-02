@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleECommerceAPI.Data;
 using SimpleECommerceAPI.Models;
+using SimpleECommerceAPI.Services;
 using System.Security.Claims;
 
 namespace SimpleECommerceAPI.Controllers;
@@ -12,43 +13,20 @@ namespace SimpleECommerceAPI.Controllers;
 [Route("api/[controller]")]
 public class CartController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly OrderService _service;
 
-    public CartController(AppDbContext context)
+    public CartController(OrderService service)
     {
-        _context = context;
+        _service = service;
     }
 
     [HttpPost("checkout")]
     public async Task<IActionResult> Checkout([FromBody] List<OrderItem> items)
     {
-        if (items.Count == 0) return BadRequest("Cart is empty.");
-
         var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+        await _service.CreateAsync(items,userId);
 
-        var order = new Order
-        {
-            UserId = userId,
-            Items = new List<OrderItem>()
-        };
-
-        foreach (var item in items)
-        {
-            var product = await _context.Products.FindAsync(item.ProductId);
-            if (product == null) return NotFound($"Product {item.ProductId} not found.");
-
-            order.Items.Add(new OrderItem
-            {
-                ProductId = product.Id,
-                Quantity = item.Quantity,
-                PriceAtPurchase = product.Price
-            });
-        }
-
-        _context.Orders.Add(order);
-        await _context.SaveChangesAsync();
-
-        return Ok(new { order.Id, order.CreatedAt, order.Items });
+        return Ok();
     }
 
     [HttpGet("my-orders")]
@@ -56,11 +34,7 @@ public class CartController : ControllerBase
     {
         var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
 
-        var orders = await _context.Orders
-            .Include(o => o.Items)
-            .ThenInclude(i => i.Product)
-            .Where(o => o.UserId == userId)
-            .ToListAsync();
+        var orders = await _service.GetAllOrdersAsync(userId);
 
         return Ok(orders);
     }
