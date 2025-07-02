@@ -58,3 +58,26 @@ Press F5 or run dotnet run
 
 4. Test in Swagger
 Visit: https://localhost:{port}/swagger
+
+## 🛠 Tech Stack
+C# / ASP.NET Core 8
+
+Entity Framework Core
+
+SQL Server / SQLite
+
+JWT Authentication
+
+Swagger UI
+
+BCrypt password hashing
+
+📄 License
+MIT — free to use, modify, and share.
+
+## 👤 Author
+Elham7899
+GitHub: github.com/Elham7899
+
+If you like this project, give it a ⭐ on GitHub!
+
