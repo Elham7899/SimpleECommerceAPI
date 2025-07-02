@@ -7,7 +7,7 @@ public class OrderItem
 
     //Porps
     public int Quantity { get; set; }
-    public decimal UnitPrice { get; set; }
+    public decimal PriceAtPurchase { get; set; }
 
     //Fk
     public int ProductId { get; set; }

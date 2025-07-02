@@ -6,7 +6,7 @@ public class Order
     public int Id { get; set; }
 
     //Props
-    public DateTime OrderDate { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     //FK
     public int UserId { get; set; }
