@@ -16,4 +16,45 @@ A secure and clean .NET Web API for a simple e-commerce backend, including produ
 ---
 
 ## 📂 Project Structure
+SimpleECommerceAPI/
+│
+├── Controllers/
+│ ├── AuthController.cs
+│ ├── ProductController.cs
+│ └── CartController.cs
+│
+├── Data/
+│ └── AppDbContext.cs
+│
+├── Models/
+│ ├── Product.cs
+│ ├── User.cs
+│ ├── Order.cs
+│ └── OrderItem.cs
+│
+├── DTOs/
+│ ├── RegisterDto.cs
+│ └── LoginDto.cs
+│
+├── Program.cs
+└── appsettings.json
 
+---
+
+## 🚀 How to Run the Project
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/Elham7899/SimpleECommerceAPI.git
+   cd SimpleECommerceAPI
+
+2. Set up the database
+Configure connection string in appsettings.json
+Run migrations (if added) or let EF create tables
+
+3. Run the app
+Open in Visual Studio
+Press F5 or run dotnet run
+
+4. Test in Swagger
+Visit: https://localhost:{port}/swagger
