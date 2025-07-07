@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using SimpleECommerceAPI.Data;
 using SimpleECommerceAPI.Models;
 
